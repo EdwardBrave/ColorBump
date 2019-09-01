@@ -17,6 +17,12 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        startPos = transform.position;
+    }
+
+    private void OnDisable()
+    {
+        rb.velocity = Vector3.zero;
     }
 
     private void Update()
@@ -41,7 +47,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Update();
-        startPos += new Vector3(0, 0, speed / 3 * Time.fixedDeltaTime);
+        startPos += new Vector3(0, 0, speed * Time.fixedDeltaTime);
 
         if (Input.touchCount > 0)
             OnTouch(Input.touches[0].position);
@@ -50,7 +56,7 @@ public class PlayerController : MonoBehaviour
             OnTouch(Input.mousePosition);
 #endif
         else
-            nextPos = transform.position + new Vector3(0, 0, speed * Time.fixedDeltaTime);
+            nextPos = transform.position + new Vector3(0, 0, speed * 2.57F * Time.fixedDeltaTime);
 
         if (border != 0)
         {
