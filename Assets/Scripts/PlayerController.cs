@@ -20,7 +20,17 @@ public class PlayerController : MonoBehaviour
         startPos = transform.position;
     }
 
-    private void OnDisable()
+    private void OnEnable()
+    {
+#if UNITY_EDITOR
+        if (Input.GetMouseButton(0))
+            startTouchPos = Input.mousePosition;
+#endif
+        if (Input.touchCount > 0)
+            startTouchPos = Input.touches[0].position;
+    }
+
+        private void OnDisable()
     {
         rb.velocity = Vector3.zero;
     }

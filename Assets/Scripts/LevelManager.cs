@@ -11,7 +11,6 @@ public class LevelManager : MonoBehaviour
     {
         if (levelIndex < 0 || levelIndex >= levels.Count || levels[levelIndex] == "")
             return;
-        Debug.Log(levels[levelIndex]);
         SceneManager.LoadScene(levels[levelIndex]);
     }
 }
