@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
     void OnTouch(Vector2 position)
     {
         nextPos = new Vector3(
-            startPos.x - (startTouchPos.x - position.x) / Screen.width * 10,
+            startPos.x - (startTouchPos.x - position.x) / Screen.width * 14,
             startPos.y,
             startPos.z - (startTouchPos.y - position.y) / Screen.height * 25); 
     }
