@@ -195,6 +195,8 @@ MonoBehaviour:
   walGens:
   - {fileID: 11378454}
   objects: []
+  gameCamera: {fileID: 408443085}
+  gcUpdateSpeed: 10
   wallsCount: 5
   difficulty: 0.3
   floor: {fileID: 1268898296}
@@ -729,7 +731,7 @@ PrefabInstance:
     - target: {fileID: 7102548750920517435, guid: 29f95d74a1699034cac8117ff05bc4ab,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5
+      value: 5.37
       objectReference: {fileID: 0}
     - target: {fileID: 7102548750920517435, guid: 29f95d74a1699034cac8117ff05bc4ab,
         type: 3}
