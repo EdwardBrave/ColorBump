@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -12,6 +13,10 @@ public class GameManager : MonoBehaviour
     public GameMode mode;
 
     public AudioSource music;
+
+    public GameObject pauseScreen;
+    public GameObject gameOverScreen;
+    public Text gameOverLabel;
 
     public static int EXIT = -1;
     public static int READY = 0;
@@ -29,7 +34,8 @@ public class GameManager : MonoBehaviour
         state = READY;
         camMotion.enabled = false;
         playerController.enabled = false;
-
+        pauseScreen.SetActive(false);
+        gameOverScreen.SetActive(false);
         music.enabled = MusicSwitcher.bgMusicLevel > 0;
         music.Pause();
     }
@@ -40,7 +46,8 @@ public class GameManager : MonoBehaviour
         state = PLAYING;
         camMotion.enabled = true;
         playerController.enabled = true;
-
+        pauseScreen.SetActive(false);
+        Time.timeScale = 1;
         music.Play();
     }
 
@@ -49,14 +56,15 @@ public class GameManager : MonoBehaviour
         state = PAUSE;
         camMotion.enabled = false;
         playerController.enabled = false;
-
+        pauseScreen.SetActive(true);
+        Time.timeScale = 0;
         music.Pause();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (state == READY || state == PAUSE)
+        if (state == READY)
         {
 #if UNITY_EDITOR
             if (Input.GetMouseButtonDown(0))
@@ -79,16 +87,18 @@ public class GameManager : MonoBehaviour
         state = GAME_OVER;
         if (e.result == GameOverEventArgs.WIN)
         {
+            gameOverLabel.text = "YOU WIN! ;D";
             camMotion.enabled = false;
             mode.enabled = false;
         }
         else if (e.result == GameOverEventArgs.LOOSE)
         {
+            gameOverLabel.text = "YOU LOOSE! : (";
             camMotion.enabled = false;
             mode.enabled = false;
             playerController.enabled = false;
         }
-
+        gameOverScreen.SetActive(true);
     }
 
     public void Exit()
